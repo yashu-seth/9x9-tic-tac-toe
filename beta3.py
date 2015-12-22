@@ -7,8 +7,7 @@ class SmallBoard(object):
 
     def __init__(self, squares=[]):
         if len(squares)==0:
-            self.squares = [None,None,None,None,None,
-                            None,None,None,None]
+            self.squares = [None,]*9
         else: self.squares = squares
 
     def display_board(self):
@@ -23,10 +22,7 @@ class SmallBoard(object):
         self.squares[move] = player
 
     def possible_moves(self):
-        pos_moves = []
-        for i in range(9):
-            if self.squares[i] == None: pos_moves.append(i)
-        return pos_moves
+        return list(index for index,sq in enumerate(self.squares) if not sq)
 
     def winner(self):
         x = 0
@@ -43,13 +39,7 @@ class SmallBoard(object):
         return None
 
     def complete(self):
-        if None not in self.squares:
-            return 1
-        if self.winner() == 'X':
-            return 1
-        if self.winner() == 'O':
-            return 1
-        return 0
+        return any([None not in self.squares, self.winner() == 'X', self.winner() == 'O'])
 
     def empty(self):
         c = 1
