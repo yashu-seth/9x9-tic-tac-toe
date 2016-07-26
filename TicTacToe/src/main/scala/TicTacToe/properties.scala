@@ -21,6 +21,8 @@ case object O extends Player
 
 trait GameProperties {
 
+    type Move = (Int, Int)
+
     val winningCombos = List(List(0, 1, 2), List(3, 4, 5),
                              List(6, 7, 8), List(0, 3, 6),
                              List(1, 4, 7), List(2, 5, 8),

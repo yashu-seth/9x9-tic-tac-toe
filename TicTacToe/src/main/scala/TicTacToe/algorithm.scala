@@ -6,6 +6,8 @@ trait MiniMax extends GameProperties {
 
     val EmptyBoard = SmallBoard((1 to 9).toVector map (x => Empty))
 
+    val EmptyBigBoard = BigBoard((1 to 9).toVector map (x => EmptyBoard))
+
     def moveScore(board: SmallBoard, pl: Player): Int = {
         if (board.isComplete) {
             if (board.winner == computerPlayer) 1
