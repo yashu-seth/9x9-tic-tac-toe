@@ -12,7 +12,7 @@ trait MiniMax extends GameProperties {
     // 9X9 game.
     def moveScore(board: Board, pl: Player, lastSmallMove: Int = -1, depth: Int = -1): Int = {
 
-        if(depth==maxDepth) 0
+        if(depth>=maxDepth) 0
 
         else if (board.isComplete) {
             if (board.winner == computerPlayer) 1
