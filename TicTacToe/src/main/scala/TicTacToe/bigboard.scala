@@ -1,6 +1,6 @@
 package TicTacToe
 
-case class BigBoard(boards: Vector[SmallBoard]) extends GameProperties {
+case class BigBoard(boards: Vector[SmallBoard]) extends Board with GameProperties {
 
     override def toString: String = {
         def getSmallRow(board: SmallBoard, row: Int): String =
@@ -32,6 +32,10 @@ case class BigBoard(boards: Vector[SmallBoard]) extends GameProperties {
     def availableSmallBoard(prevSmallMove: Int): List[SmallBoard] = {
         if (!boards(prevSmallMove).isComplete) List(boards(prevSmallMove))
         else {boards filter (x => !x.isComplete)}.toList
+    }
+
+    def possibleMoves(lastSmallMove: Int): List[Move] = {
+        boards(lastSmallMove).possibleMoves map (x => (lastSmallMove, x))
     }
 
     lazy val winner: Player = {

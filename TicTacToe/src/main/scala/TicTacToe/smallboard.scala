@@ -1,6 +1,6 @@
 package TicTacToe
 
-case class SmallBoard(squares: Vector[Player]) extends GameProperties {
+case class SmallBoard(squares: Vector[Player]) extends Board with GameProperties {
 
     override def toString: String = {
         def displayBoard(index: Int): String = {
@@ -19,7 +19,7 @@ case class SmallBoard(squares: Vector[Player]) extends GameProperties {
         {for(i <- 0 until 9 if squares(i) == Empty) yield i}.toList
     }
 
-    lazy val winner: Player = {
+    override lazy val winner: Player = {
         def findWinner(combos: List[List[Int]], pl: Player): Boolean = {
             if (combos.isEmpty) false
             else if ((combos.head map (squares(_) == pl)) forall  (_ == true)) true
@@ -31,7 +31,7 @@ case class SmallBoard(squares: Vector[Player]) extends GameProperties {
         else Empty
     }
 
-    lazy val isComplete: Boolean = {
+    override lazy val isComplete: Boolean = {
         this.winner != Empty ||
         squares.indexOf(Empty) == -1
     }

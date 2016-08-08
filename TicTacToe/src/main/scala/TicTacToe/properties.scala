@@ -1,5 +1,10 @@
 package TicTacToe
 
+abstract class Board {
+    val winner: Player
+    val isComplete: Boolean
+}
+
 trait Player {
     override def toString: String = this match {
         case Empty => "-"
@@ -22,6 +27,8 @@ case object O extends Player
 trait GameProperties {
 
     type Move = (Int, Int)
+
+    val maxDepth = 10
 
     val winningCombos = List(List(0, 1, 2), List(3, 4, 5),
                              List(6, 7, 8), List(0, 3, 6),
